@@ -3,13 +3,11 @@ cmake_minimum_required(VERSION 3.16)
 project(ticket_server LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
 find_package(Qt6 REQUIRED COMPONENTS WebSockets)
-find_package(Qt6 REQUIRED COMPONENTS Qml)
 
 # ===================== App HEADER/SOURCES  =====================
 set(SOURCE
@@ -46,7 +44,7 @@ else()
     include(${CMAKE_CURRENT_SOURCE_DIR}/../shared_functions.cmake)
     add_module(tools)
 
-    add_executable(ticket_server
+    qt_add_executable(ticket_server
         ${SOURCE}
         ${HEADERS}
         main.cpp
@@ -57,6 +55,7 @@ else()
     set_target_properties(ticket_server PROPERTIES
         MACOSX_BUNDLE TRUE
         WIN32_EXECUTABLE TRUE
+        QT_ANDROID_ABIS "arm64-v8a;x86"
     )
 endif()
 

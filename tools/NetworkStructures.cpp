@@ -70,25 +70,25 @@ INetworkDataSctructure::DataType INetworkDataSctructure::getDataType(QDataStream
 bool ReuqestTheaters::readStream(QDataStream& in, DataType type)
 {
     return INetworkDataSctructure::transactionReadStream(in, type,
-        [this](QDataStream&) -> void {});
+        [](QDataStream&) -> void {});
 }
 
 bool ReuqestTheaters::writeStream(QDataStream& out, DataType type) const
 {
     return INetworkDataSctructure::transactionWriteStream(out, type,
-        [this](QDataStream&) -> void {});
+        [](QDataStream&) -> void {});
 }
 
 bool ReuqestMovies::readStream(QDataStream& in, DataType type)
 {
     return INetworkDataSctructure::transactionReadStream(in, type,
-        [this](QDataStream&) -> void {});
+        [](QDataStream&) -> void {});
 }
 
 bool ReuqestMovies::writeStream(QDataStream& out, DataType type) const
 {
     return INetworkDataSctructure::transactionWriteStream(out, type,
-        [this](QDataStream&) -> void {});
+        [](QDataStream&) -> void {});
 }
 
 bool DataPack::readStream(QDataStream& in, DataType type)

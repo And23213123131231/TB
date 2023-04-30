@@ -6,7 +6,7 @@ int main(int argc, char* argv[])
 {
     QCoreApplication app { argc, argv };
 
-    qint16 server_port = 7654;
+    quint16 server_port = 7654;
     {
         bool nextIsPort = false;
         for (const auto& argument : QCoreApplication::arguments()) {

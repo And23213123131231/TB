@@ -19,7 +19,7 @@ add_subdirectory(ticket_server)
 # shared functional
 add_subdirectory(tools)
 
-add_executable(appTicketBooking
+qt_add_executable(appTicketBooking
     ${TOOLS_SOURCE}
     ${TOOLS_HEADERS}
     main.cpp)
@@ -54,7 +54,7 @@ target_link_libraries(appTicketBooking
 
 
 # ===================== Tests target  =====================
-add_executable(TestApp
+qt_add_executable(TestApp
     ${TOOLS_SOURCE}
     ${TOOLS_HEADERS}
     ${TOOLS_UT_SOURCE}
@@ -87,4 +87,3 @@ set_target_properties(TestApp PROPERTIES
     WIN32_EXECUTABLE TRUE
     QT_ANDROID_ABIS "arm64-v8a;x86"
 )
-

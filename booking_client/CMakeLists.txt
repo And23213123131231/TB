@@ -33,13 +33,13 @@ set(SOURCE
 )
 
 # ===================== Client HEADER/SOURCES  =====================
-set(BOOKING_CLIENT_UT_HEADERS
-    PARENT_SCOPE
-)
+#set(BOOKING_CLIENT_UT_HEADERS
+#    PARENT_SCOPE
+#)
 
-set(BOOKING_CLIENT_UT_SOURCE
-    PARENT_SCOPE
-)
+#set(BOOKING_CLIENT_UT_SOURCE
+#    PARENT_SCOPE
+#)
 
 # ===================== QML Templates  =====================
 set(BOOKING_CLIENT_QML_MODULE_NAME TicketTemplates)
@@ -68,6 +68,7 @@ set(TARGET_BUILD booking_client)
 set_target_properties(booking_client PROPERTIES
     MACOSX_BUNDLE TRUE
     WIN32_EXECUTABLE TRUE
+    QT_ANDROID_ABIS "arm64-v8a;x86"
 )
 endif()
 
@@ -119,6 +120,7 @@ qt6_add_resources(${TARGET_BUILD} "client_resources"
     FILES
     ${client_resources}
 )
+
 
 
 
