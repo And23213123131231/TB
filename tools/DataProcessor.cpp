@@ -115,7 +115,7 @@ bool DataProcessor::readPack(qsizetype dataSize, QDataStream& in)
                 return false;
             }
         }
-        emit onMoviePackRecived(pack);
+        onMoviePackRecived(pack);
     } else if (type == INetworkDataSctructure::DataType::Theater) {
         QList<Data::Theater> pack;
         pack.reserve(dataSize);
@@ -127,7 +127,7 @@ bool DataProcessor::readPack(qsizetype dataSize, QDataStream& in)
                 return false;
             }
         }
-        emit onTheaterPackRecived(pack);
+        onTheaterPackRecived(pack);
     } else {
         qWarning() << "Unexpected data pack type";
         return false;

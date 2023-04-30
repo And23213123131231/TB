@@ -11,6 +11,7 @@ set(CMAKE_AUTOUIC ON)
 find_package(Qt6 REQUIRED COMPONENTS WebSockets)
 find_package(Qt6 REQUIRED COMPONENTS Qml)
 
+# ===================== App HEADER/SOURCES  =====================
 set(SOURCE
    ${CMAKE_CURRENT_LIST_DIR}/TicketServer.cpp
    ${CMAKE_CURRENT_LIST_DIR}/network/Connection.cpp
@@ -22,6 +23,16 @@ set(HEADERS
    ${CMAKE_CURRENT_LIST_DIR}/database/TicketsDatabase.h
 )
 
+# ===================== Unit testing HEADER/SOURCES  =====================
+set(TICKET_SERVER_UT_HEADERS
+    PARENT_SCOPE
+)
+
+set(TICKET_SERVER_UT_SOURCE
+    PARENT_SCOPE
+)
+
+# ===================== Executable or Library =====================
 if(BUILD_AS_MODULE)
     target_sources(ticket_server PRIVATE ${SOURCE} ${HEADERS})
     set(TARGET_BUILD ticket_server)

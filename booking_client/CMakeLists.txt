@@ -7,7 +7,7 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-
+# ===================== App HEADER/SOURCES  =====================
 set(HEADERS
     ${CMAKE_CURRENT_LIST_DIR}/ModulesKeeper.h
     ${CMAKE_CURRENT_LIST_DIR}/BookingClient.h
@@ -30,6 +30,15 @@ set(SOURCE
     ${CMAKE_CURRENT_LIST_DIR}/controllers/MoviesModelController.cpp
     ${CMAKE_CURRENT_LIST_DIR}/controllers/TheatersModelController.cpp
     ${CMAKE_CURRENT_LIST_DIR}/controllers/TicketsModelController.cpp
+)
+
+# ===================== Client HEADER/SOURCES  =====================
+set(BOOKING_CLIENT_UT_HEADERS
+    PARENT_SCOPE
+)
+
+set(BOOKING_CLIENT_UT_SOURCE
+    PARENT_SCOPE
 )
 
 # ===================== QML Templates  =====================

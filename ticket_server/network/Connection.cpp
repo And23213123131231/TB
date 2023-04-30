@@ -113,7 +113,7 @@ void Connection::onTheaterPackRecived(const QList<Data::Theater>&)
     m_socket->close(QWebSocketProtocol::CloseCodeWrongDatatype);
 }
 
-void Connection::onReuqestTicketsRecived(int theaterId, int movieId)
+void Connection::onReuqestTicketsRecived(quint32 theaterId, quint32 movieId)
 {
     emit ticketsRequested(theaterId, movieId);
 }

@@ -43,7 +43,7 @@ public:
      * \param movieId movie id
      * \return
      */
-    [[nodiscard]] Data::Tickets theaterMovieTickets(int theaterId, int movieId);
+    [[nodiscard]] Data::Tickets theaterMovieTickets(quint32 theaterId, quint32 movieId);
 
     /*!
      * \brief bookTickets attempt to book tickets

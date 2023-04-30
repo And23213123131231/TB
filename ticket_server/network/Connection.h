@@ -60,7 +60,7 @@ signals:
      * \param theaterId
      * \param movieId
      */
-    void ticketsRequested(int theaterId, int movieId);
+    void ticketsRequested(quint32 theaterId, quint32 movieId);
 
     /*!
      * \brief bookingRecived request booking
@@ -77,7 +77,7 @@ protected:
     void onReuqestBookingRecived(const Data::Tickets&) override;
     void onBookingResultRecived(bool) override;
     void onTheaterPackRecived(const QList<Data::Theater>&) override;
-    void onReuqestTicketsRecived(int theaterId, int movieId) override;
+    void onReuqestTicketsRecived(quint32 theaterId, quint32 movieId) override;
 
 private slots:
     /*!

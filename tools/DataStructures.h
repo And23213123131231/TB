@@ -14,8 +14,8 @@ struct Movie {
     Q_GADGET
 
 public:
-    int id = 0;
-    int score = 0;
+    quint32 id = 0;
+    quint32 score = 0;
     QString name;
     QString critics;
     QString synopsis;
@@ -33,11 +33,11 @@ public:
     }
 
     /*!
-     * \brief operator =
+     * \brief hasSameId comparsion by Id
      * \param other
-     * \return comparison by id
+     * \return comparison result
      */
-    bool operator==(const Movie& other) const
+    bool hasSameId(const Movie& other) const
     {
         return id == other.id;
     }
@@ -50,9 +50,9 @@ struct Theater {
     Q_GADGET
 
 public:
-    int id = 0;
+    quint32 id = 0;
     QString name;
-    QSet<int> movies;
+    QSet<quint32> movies;
 
     /*!
      * \brief operator <
@@ -65,11 +65,11 @@ public:
     }
 
     /*!
-     * \brief operator =
+     * \brief hasSameId comparsion by Id
      * \param other
-     * \return comparison by id
+     * \return comparison result
      */
-    bool operator==(const Theater& other) const
+    bool hasSameId(const Theater& other) const
     {
         return id == other.id;
     }
@@ -82,10 +82,10 @@ struct Tickets {
     Q_GADGET
 
 public:
-    int theaterId = 0;
-    int movieId = 0;
-    int rowCount = 0;
-    int colCount = 0;
+    quint32 theaterId = 0;
+    quint32 movieId = 0;
+    quint32 rowCount = 0;
+    quint32 colCount = 0;
 
     enum class Status : quint8 {
         Free = 0,
@@ -111,11 +111,11 @@ public:
     }
 
     /*!
-     * \brief operator =
+     * \brief  hasSameId  sort order by theaterId and movieId
      * \param other
-     * \return comparison by theaterId and movieId
+     * \return comparison result
      */
-    bool operator==(const Tickets& other) const
+    bool hasSameId(const Tickets& other) const
     {
         return theaterId == other.theaterId && movieId == other.movieId;
     }

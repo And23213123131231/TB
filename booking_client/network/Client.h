@@ -79,7 +79,7 @@ protected:
     void onMoviePackRecived(const QList<Data::Movie>&) override;
     void onBookingResultRecived(bool) override;
     void onTheaterPackRecived(const QList<Data::Theater>&) override;
-    void onReuqestTicketsRecived(int theaterId, int movieId) override;
+    void onReuqestTicketsRecived(quint32 theaterId, quint32 movieId) override;
 
 private:
     const QUrl m_serverUrl;

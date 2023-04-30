@@ -152,7 +152,7 @@ void Client::onTheaterPackRecived(const QList<Data::Theater>& pack)
     emit transferStatus(false);
 }
 
-void Client::onReuqestTicketsRecived(int theaterId, int movieId)
+void Client::onReuqestTicketsRecived(quint32 theaterId, quint32 movieId)
 {
     qDebug() << "Client::onReuqestTicketsRecived disconnect";
     // client does not handle this information

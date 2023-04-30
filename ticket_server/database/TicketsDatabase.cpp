@@ -29,7 +29,7 @@ bool TicketsDatabase::init(const QByteArray& data)
         return false;
     };
 
-    auto assignInt = [](int& out, const QString& searchKey, const QJsonObject& obj) -> bool {
+    auto assignInt = [](quint32& out, const QString& searchKey, const QJsonObject& obj) -> bool {
         if (const auto& it = obj.find(searchKey); it != obj.end()) {
             out = it.value().toInt();
             return true;
@@ -54,7 +54,7 @@ bool TicketsDatabase::init(const QByteArray& data)
                 qWarning() << "Movie id is not valid " << tmp.id;
                 return false;
             } else if (insertPos = std::lower_bound(m_movies.begin(), m_movies.end(), tmp);
-                       insertPos != m_movies.end() && insertPos->id == tmp.id) {
+                       insertPos != m_movies.end() && insertPos->hasSameId(tmp)) {
                 qWarning() << "Movie id duplication " << tmp.id;
                 return false;
             }
@@ -85,7 +85,7 @@ bool TicketsDatabase::init(const QByteArray& data)
                 qWarning() << "Theater id is not valid " << tmp.id;
                 return false;
             } else if (insertPos = std::lower_bound(m_theaters.begin(), m_theaters.end(), tmp);
-                       insertPos != m_theaters.end() && insertPos->id == tmp.id) {
+                       insertPos != m_theaters.end() && insertPos->hasSameId(tmp)) {
                 qWarning() << "Theater id duplication " << tmp.id;
                 return false;
             }
@@ -121,13 +121,13 @@ bool TicketsDatabase::init(const QByteArray& data)
     return true;
 }
 
-Data::Tickets TicketsDatabase::theaterMovieTickets(int theaterId, int movieId)
+Data::Tickets TicketsDatabase::theaterMovieTickets(quint32 theaterId, quint32 movieId)
 {
     Data::Tickets tickets;
     tickets.theaterId = theaterId;
     tickets.movieId = movieId;
 
-    if (auto theaterIt = std::lower_bound(m_tickets.begin(), m_tickets.end(), tickets); theaterIt != m_tickets.end() && *theaterIt == tickets) {
+    if (auto theaterIt = std::lower_bound(m_tickets.begin(), m_tickets.end(), tickets); theaterIt != m_tickets.end() && theaterIt->hasSameId(tickets)) {
         tickets = *theaterIt;
     }
     return tickets;
@@ -135,7 +135,7 @@ Data::Tickets TicketsDatabase::theaterMovieTickets(int theaterId, int movieId)
 
 bool TicketsDatabase::bookTickets(const Data::Tickets& tickets)
 {
-    if (auto theaterIt = std::lower_bound(m_tickets.begin(), m_tickets.end(), tickets); theaterIt != m_tickets.end() && *theaterIt == tickets) {
+    if (auto theaterIt = std::lower_bound(m_tickets.begin(), m_tickets.end(), tickets); theaterIt != m_tickets.end() && theaterIt->hasSameId(tickets)) {
         bool bookingConfirmation = true;
         auto currentSeatsState = theaterIt->ticketsStatus;
         for (auto seatIdx = 0; seatIdx < tickets.ticketsStatus.size(); ++seatIdx) {

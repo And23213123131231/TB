@@ -44,13 +44,13 @@ public:
      * \param in stream
      * \return result
      */
-    virtual bool readStream(QDataStream& in, DataType type = DataType::_Last) = 0;
+    virtual bool readStream(QDataStream& in, DataType type) = 0;
     /*!
      * \brief writeStream
      * \param out write object to stram
      * \return result
      */
-    virtual bool writeStream(QDataStream& out, DataType type = DataType::_Last) const = 0;
+    virtual bool writeStream(QDataStream& out, DataType type) const = 0;
 
     /*!
      * \brief getDataType
@@ -246,8 +246,8 @@ struct ReuqestTickets : public INetworkDataSctructure {
     Q_GADGET
 
 public:
-    int theaterId = 0;
-    int movieId = 0;
+    quint32 theaterId = 0;
+    quint32 movieId = 0;
 
     ReuqestTickets() = default;
     ~ReuqestTickets() override = default;

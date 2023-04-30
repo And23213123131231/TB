@@ -78,7 +78,7 @@ protected:
     /*!
      * \brief onReuqestTicketsRecived if incoming message is ReuqestTickets this method will be called
      */
-    virtual void onReuqestTicketsRecived(int theaterId, int movieId) = 0;
+    virtual void onReuqestTicketsRecived(quint32 theaterId, quint32 movieId) = 0;
 
     /*!
      * \brief onReuqestBookingRecived if incoming message is ReuqestBooking this method will be called
