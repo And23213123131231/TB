@@ -67,7 +67,7 @@ signals:
      * \brief transferStatus indicate if client has active transaction (workaround until message queue with id doesn't finished)
      * \param transfer
      */
-    void transferStatus(bool transfer);
+    void transferStatus(bool transfer, const QString reason = "");
 
 protected:
     void onMovieRecived(const Data::Movie&) override;
@@ -84,4 +84,5 @@ protected:
 private:
     const QUrl m_serverUrl;
     QWebSocket* m_webSocket;
+    quint64 m_connectionAttempt = 0;
 };

@@ -20,6 +20,12 @@ BasicScreen {
         TicketsModelController.movieId = movieId
     }
 
+    Component.onDestruction: {
+        // prevent data storing between sessions
+        TicketsModelController.theaterId = 0
+        TicketsModelController.movieId = 0
+    }
+
     sourceComponent: ColumnLayout {
         anchors.fill: parent
 

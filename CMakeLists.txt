@@ -16,7 +16,6 @@ add_subdirectory(booking_client)
 add_library(ticket_server STATIC)
 add_subdirectory(ticket_server)
 
-
 # shared functional
 add_subdirectory(tools)
 

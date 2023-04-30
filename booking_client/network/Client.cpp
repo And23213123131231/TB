@@ -41,7 +41,11 @@ Client::~Client()
 void Client::connectToServer()
 {
     m_webSocket->open(m_serverUrl);
-    emit transferStatus(true);
+    if (++m_connectionAttempt > 1) {
+        emit transferStatus(true, QString("Trying to connect to the server(connection attempt %1)\n %2").arg(QString::number(m_connectionAttempt), m_serverUrl.toString()));
+    } else {
+        emit transferStatus(true);
+    }
 }
 
 void Client::requestTickets(int theaterId, int movieId)
@@ -69,6 +73,7 @@ void Client::bookTickets(const Data::Tickets& tickets)
 
 void Client::connected()
 {
+    m_connectionAttempt = 0;
     // request movies
     {
         QByteArray buff;

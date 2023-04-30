@@ -19,8 +19,11 @@ BookingClient::BookingClient(QUrl&& url, QObject* parent)
     // TODO: move to style singletone class
     registerQmlObjects({ { QUrl("qrc:/qml/AppSettings.qml"), "Settings" } });
 
-    connect(m_client, &Client::transferStatus, this, [](bool transferInProgress) {
+    connect(m_client, &Client::transferStatus, this, [](bool transferInProgress, const QString& reason) {
         StackViewController::get()->setWaitMode(transferInProgress);
+        if (!reason.isEmpty()) {
+            StackViewController::get()->showMessage(reason);
+        }
     });
 
     connect(m_client, &Client::ticketsRecived, m_ticketsModelController.get(),

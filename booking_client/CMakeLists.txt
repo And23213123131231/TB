@@ -54,6 +54,9 @@ if(BUILD_AS_MODULE)
     set(TARGET_BUILD booking_client)
 
 else()
+    include(${CMAKE_CURRENT_SOURCE_DIR}/../shared_functions.cmake)
+    add_module(tools)
+
     add_executable(booking_client
         ${SOURCE}
         ${HEADERS}

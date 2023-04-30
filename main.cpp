@@ -11,15 +11,15 @@ const int server_port = 7654;
 
 int main(int argc, char* argv[])
 {
-    QGuiApplication app(argc, argv);
+    QGuiApplication app{argc, argv};
 
-    TicketServer server(server_port);
+    TicketServer server{server_port};
     if (!server.init()) {
         qCritical() << "Server start failed";
         app.exit(0);
     }
 
-    BookingClient client(QUrl(QString("wss://localhost:%1").arg(server_port)));
+    BookingClient client{QUrl{QString("wss://localhost:%1").arg(server_port)}};
 
     return app.exec();
 }

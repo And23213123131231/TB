@@ -1,16 +1,25 @@
+#include "BookingClient.h"
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include "BookingClient.h"
-
-namespace {
-const int server_port = 7654;
-}
 
 int main(int argc, char* argv[])
 {
-    QGuiApplication app(argc, argv);
+    QGuiApplication app { argc, argv };
 
-    BookingClient client(QUrl(QString("wss://localhost:%1").arg(server_port)));
+    QString serverUrl = QStringLiteral("wss://localhost:7654");
+    {
+        bool nextIsServerAddr = false;
+        for (const auto& argument : QCoreApplication::arguments()) {
+            if (QStringLiteral("--addr") == argument) {
+                nextIsServerAddr = true;
+            } else if (nextIsServerAddr) {
+                nextIsServerAddr = false;
+                serverUrl = QStringLiteral("wss://%1").arg(argument);
+            }
+        }
+    }
+
+    BookingClient client(QUrl { serverUrl });
 
     return app.exec();
 }
