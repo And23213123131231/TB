@@ -17,7 +17,7 @@ QtObject {
 
     readonly property int navigationBarHeight: 50
     readonly property int buttonHeight: 40
-    readonly property int scrollBarWidth: 40
+    readonly property int scrollBarWidth: 10
 
     readonly property int backButtonTextSize: 16
 
