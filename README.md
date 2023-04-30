@@ -26,6 +26,8 @@ You can change the port by passing '--port number' as a startup argument, were n
 __Client__ will try cennect to server automaticaly after start. If you have change server port, please pass '--addr [ip]:[port]' as a startup command to client 
 
 
+## Unit Tests
+It is possible to run Unit testing. Run Test App, which is one of the target for standalone build
 
 ## License
 
