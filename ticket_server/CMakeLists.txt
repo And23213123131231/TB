@@ -23,6 +23,21 @@ set(HEADERS
    ${CMAKE_CURRENT_LIST_DIR}/database/TicketsDatabase.h
 )
 
+# ===================== Unit testing HEADER/SOURCES  =====================
+set(TICKET_SERVER_UT_HEADERS
+    ${CMAKE_CURRENT_LIST_DIR}/unit_test/ServerTestMain.h
+    ${CMAKE_CURRENT_LIST_DIR}/unit_test/TicketsDatabase_Test.h
+    ${CMAKE_CURRENT_LIST_DIR}/unit_test/Connection_Test.h
+    PARENT_SCOPE
+)
+
+set(TICKET_SERVER_UT_SOURCE
+    ${CMAKE_CURRENT_LIST_DIR}/unit_test/ServerTestMain.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/unit_test/TicketsDatabase_Test.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/unit_test/Connection_Test.cpp
+    PARENT_SCOPE
+)
+
 # ===================== Executable or Library =====================
 if(BUILD_AS_MODULE)
     target_sources(ticket_server PRIVATE ${SOURCE} ${HEADERS})

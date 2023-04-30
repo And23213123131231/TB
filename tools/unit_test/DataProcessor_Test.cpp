@@ -44,6 +44,14 @@ public:
         return packListToMessage<NetworkData::Theater>(p, buff);
     }
 
+    bool sendStructure(const NetworkData::INetworkDataSctructure& data, NetworkData::INetworkDataSctructure::DataType type)
+    {
+        QByteArray buff;
+        QDataStream stream(&buff, QIODevice::WriteOnly);
+        data.writeStream(stream, type);
+        return parseTextMessage(buff);
+    }
+
 protected:
     void onMovieRecived(const Data::Movie& m) override { cbMovieRecived(m); };
     void onTheaterRecived(const Data::Theater& t) override { cbTheaterRecived(t); }
@@ -60,14 +68,6 @@ private:
     DataProcessor_Test* m_testClass;
 };
 
-bool sendStructure(DataProcessorTestImpl* processor, const NetworkData::INetworkDataSctructure& data, NetworkData::INetworkDataSctructure::DataType type)
-{
-    QByteArray buff;
-    QDataStream stream(&buff, QIODevice::WriteOnly);
-    data.writeStream(stream, type);
-    return processor->parseTextMessage(buff);
-}
-
 void DataProcessor_Test::initTestCase()
 {
     m_processor.reset(new DataProcessorTestImpl { this });
@@ -80,7 +80,7 @@ void DataProcessor_Test::testMovieRecived()
         // we don't need to check content,  only  fact of receive
         recived = true;
     };
-    QVERIFY(sendStructure(m_processor.get(), NetworkData::Movie {}, NetworkData::INetworkDataSctructure::DataType::Movie));
+    QVERIFY(m_processor->sendStructure(NetworkData::Movie {}, NetworkData::INetworkDataSctructure::DataType::Movie));
     QVERIFY(recived);
 }
 
@@ -91,7 +91,7 @@ void DataProcessor_Test::testTheaterRecived()
         // we don't need to check content,  only  fact of receive
         recived = true;
     };
-    QVERIFY(sendStructure(m_processor.get(), NetworkData::Theater {}, NetworkData::INetworkDataSctructure::DataType::Theater));
+    QVERIFY(m_processor->sendStructure(NetworkData::Theater {}, NetworkData::INetworkDataSctructure::DataType::Theater));
     QVERIFY(recived);
 }
 
@@ -102,7 +102,7 @@ void DataProcessor_Test::testTicketsRecived()
         // we don't need to check content,  only  fact of receive
         recived = true;
     };
-    QVERIFY(sendStructure(m_processor.get(), NetworkData::Tickets {}, NetworkData::INetworkDataSctructure::DataType::Tickets));
+    QVERIFY(m_processor->sendStructure(NetworkData::Tickets {}, NetworkData::INetworkDataSctructure::DataType::Tickets));
     QVERIFY(recived);
 }
 
@@ -114,7 +114,7 @@ void DataProcessor_Test::testReuqestMoviesRecived()
         recived = true;
     };
 
-    QVERIFY(sendStructure(m_processor.get(), NetworkData::ReuqestMovies {}, NetworkData::INetworkDataSctructure::DataType::ReuqestMovies));
+    QVERIFY(m_processor->sendStructure(NetworkData::ReuqestMovies {}, NetworkData::INetworkDataSctructure::DataType::ReuqestMovies));
     QVERIFY(recived);
 }
 
@@ -126,7 +126,7 @@ void DataProcessor_Test::testReuqestTheatersRecived()
         recived = true;
     };
 
-    QVERIFY(sendStructure(m_processor.get(), NetworkData::ReuqestTheaters {}, NetworkData::INetworkDataSctructure::DataType::ReuqestTheaters));
+    QVERIFY(m_processor->sendStructure(NetworkData::ReuqestTheaters {}, NetworkData::INetworkDataSctructure::DataType::ReuqestTheaters));
     QVERIFY(recived);
 }
 
@@ -138,7 +138,7 @@ void DataProcessor_Test::testReuqestTicketsRecived()
         recived = true;
     };
 
-    QVERIFY(sendStructure(m_processor.get(), NetworkData::ReuqestTickets {}, NetworkData::INetworkDataSctructure::DataType::ReuqestTickets));
+    QVERIFY(m_processor->sendStructure(NetworkData::ReuqestTickets {}, NetworkData::INetworkDataSctructure::DataType::ReuqestTickets));
     QVERIFY(recived);
 }
 
@@ -150,7 +150,7 @@ void DataProcessor_Test::testReuqestBookingRecived()
         recived = true;
     };
 
-    QVERIFY(sendStructure(m_processor.get(), NetworkData::ReuqestBooking {}, NetworkData::INetworkDataSctructure::DataType::ReuqestBooking));
+    QVERIFY(m_processor->sendStructure(NetworkData::ReuqestBooking {}, NetworkData::INetworkDataSctructure::DataType::ReuqestBooking));
     QVERIFY(recived);
 }
 
@@ -162,7 +162,7 @@ void DataProcessor_Test::testBookingResultRecived()
         recived = true;
     };
 
-    QVERIFY(sendStructure(m_processor.get(), NetworkData::BookingResult {}, NetworkData::INetworkDataSctructure::DataType::BookingResult));
+    QVERIFY(m_processor->sendStructure(NetworkData::BookingResult {}, NetworkData::INetworkDataSctructure::DataType::BookingResult));
     QVERIFY(recived);
 }
 
